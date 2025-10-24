@@ -1,0 +1,52 @@
+﻿<Page x:Class="ContractClaim.ApproveClaimsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Approve Claims">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Approve Pending Claims" FontSize="24" FontWeight="Bold" 
+                   Foreground="#2C3E50" Margin="0,0,0,20"/>
+
+        <Border Grid.Row="1" Background="#F8F9FA" CornerRadius="10" Padding="20">
+            <StackPanel>
+                <TextBlock Text="Claims Waiting Approval" FontSize="18" FontWeight="SemiBold" 
+                          Margin="0,0,0,15"/>
+
+                <ListView x:Name="lstClaims" Height="350" Background="White" BorderThickness="1" BorderBrush="#DDD">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Lecturer" DisplayMemberBinding="{Binding Name}" Width="120"/>
+                            <GridViewColumn Header="Hours" DisplayMemberBinding="{Binding Hours}" Width="80"/>
+                            <GridViewColumn Header="Rate" DisplayMemberBinding="{Binding Rate}" Width="80"/>
+                            <GridViewColumn Header="Total" DisplayMemberBinding="{Binding Total}" Width="100"/>
+                            <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100"/>
+                            <GridViewColumn Header="Actions" Width="180">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Content="✅ Approve" Background="#27AE60" Foreground="White" 
+                                                    Padding="8,4" FontWeight="SemiBold" Click="ApproveClaim_Click" 
+                                                    Tag="{Binding Id}" Margin="0,0,5,0" Cursor="Hand"/>
+                                            <Button Content="❌ Reject" Background="#E74C3C" Foreground="White" 
+                                                    Padding="8,4" FontWeight="SemiBold" Click="RejectClaim_Click" 
+                                                    Tag="{Binding Id}" Cursor="Hand"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <Button Content="🔄 Refresh List" x:Name="btnRefresh" Click="btnRefresh_Click" 
+                        Background="#3498DB" Foreground="White" FontWeight="SemiBold" 
+                        Padding="15,8" BorderThickness="0" Cursor="Hand" 
+                        HorizontalAlignment="Left" Margin="0,15,0,0"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
